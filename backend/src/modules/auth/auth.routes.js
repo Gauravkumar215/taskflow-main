@@ -6,7 +6,7 @@ import RegisterDto from "./dto/register.dto.js";
 import LoginDto from "./dto/login.dto.js";
 import ForgotPasswordDto from "./dto/forgot-password.dto.js";
 import ResetPasswordDto from "./dto/reset-password.dto.js";
-import { sendVerificationEmail } from "../../common/utils/email.js"; // adjust path if needed
+import { sendVerificationEmail } from "../../common/config/email.js"; // adjust path if needed
 
 
 
