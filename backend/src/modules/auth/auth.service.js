@@ -28,15 +28,16 @@ const register = async ({ name, email, password, role }) => {
     password,
     role,
     verificationToken: hashedToken,
+    isVerified: true
   });
 
   // Don't let email failure crash registration — user is already created
-  try {
-    await sendVerificationEmail(email, rawToken);
-  } catch (err) {
-    console.error("Failed to send verification email:", err.message);
-  }
-
+  // try {
+  //   await sendVerificationEmail(email, rawToken);
+  // } catch (err) {
+  //   console.error("Failed to send verification email:", err.message);
+  // }
+  
   const userObj = user.toObject();
   delete userObj.password;
   delete userObj.verificationToken;
