@@ -115,9 +115,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   ========================= */
   const register = async (data: any): Promise<User> => {
     try {
-      const response = await authService.register(data);
+      // Register only creates the account — no token returned
+      await authService.register(data);
 
-      const token = response.data.data.accessToken;
+      // Automatically log in after registration
+      const loginRes = await authService.login({
+        email: data.email,
+        password: data.password,
+      });
+
+      const token = loginRes.data.data.accessToken;
       localStorage.setItem("token", token);
 
       const meRes = await authService.getMe();
