@@ -6,6 +6,9 @@ import RegisterDto from "./dto/register.dto.js";
 import LoginDto from "./dto/login.dto.js";
 import ForgotPasswordDto from "./dto/forgot-password.dto.js";
 import ResetPasswordDto from "./dto/reset-password.dto.js";
+import { sendVerificationEmail } from "../../common/utils/email.js"; // adjust path if needed
+
+
 
 const router = Router();
 
@@ -27,4 +30,17 @@ router.put(
 router.get("/me", authenticate, controller.getMe);
 
 router.get("/users", authenticate, controller.getAllUsers);
+router.get("/test-email", async (req, res) => {
+  try {
+    await sendVerificationEmail("your-personal@gmail.com", "testtoken123");
+    res.json({ success: true, message: "Email sent!" });
+  } catch (err) {
+    res.status(500).json({ 
+      success: false, 
+      error: err.message,
+      code: err.code,
+      response: err.response 
+    });
+  }
+});
 export default router;
