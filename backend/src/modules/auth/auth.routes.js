@@ -32,7 +32,7 @@ router.get("/me", authenticate, controller.getMe);
 router.get("/users", authenticate, controller.getAllUsers);
 router.get("/test-email", async (req, res) => {
   try {
-    await sendVerificationEmail("your-personal@gmail.com", "testtoken123");
+    await sendVerificationEmail("admin@findzeroone.com", "testtoken123");
     res.json({ success: true, message: "Email sent!" });
   } catch (err) {
     res.status(500).json({ 
